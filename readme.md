@@ -50,3 +50,9 @@ setInterval(() => {
     this._cd.markForCheck();
 }, 1000);
 ```
+
+
+| 属性            | 默认        | 类型                                                  |
+|---------------|-----------|-----------------------------------------------------|
+| hairline      | top       | 'string','top','bottom','right','left','all','none' |
+| hairlineColor | '#efefef' | string                                              |
