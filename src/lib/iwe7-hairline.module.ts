@@ -5,6 +5,8 @@ import { ElementRef } from '@angular/core';
 import { Directive, Input } from '@angular/core';
 import { Iwe7IcssService } from 'iwe7-icss';
 
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+
 export abstract class HairLineBuilder {
   left: HairLineRef;
   right: HairLineRef;
@@ -175,6 +177,64 @@ export class HairlineDirective extends BehaviorSubject<any> {
         ...{
           color: this.hairlineColor
         }
+      });
+    }
+  }
+  @Input()
+  set hairLineTop(val: any) {
+    if (coerceBooleanProperty(val)) {
+      this.next({
+        ...this.hairlineBuilder.getLine('none'),
+        color: this.hairlineColor
+      });
+    }
+  }
+  @Input()
+  set hairLineLeft(val: any) {
+    if (coerceBooleanProperty(val)) {
+      this.next({
+        ...this.hairlineBuilder.getLine('none'),
+        color: this.hairlineColor
+      });
+    }
+  }
+  @Input()
+  set hairLineBottom(val: any) {
+    if (coerceBooleanProperty(val)) {
+      this.next({
+        ...this.hairlineBuilder.getLine('none'),
+        color: this.hairlineColor
+      });
+    }
+  }
+  @Input()
+  set hairLineRight(val: any) {
+    if (coerceBooleanProperty(val)) {
+      this.next({
+        ...this.hairlineBuilder.getLine('none'),
+        color: this.hairlineColor
+      });
+    }
+  }
+
+  @Input()
+  set hairLineAll(val: any) {
+    if (coerceBooleanProperty(val)) {
+      this.next({
+        ...this.hairlineBuilder.getLine('all'),
+        ...{
+          border: '1px solid ' + this.hairlineColor
+        }
+      });
+    }
+  }
+
+  @Input()
+  set hairLineNone(val: any) {
+    if (coerceBooleanProperty(val)) {
+      this.next({
+        ...this.hairlineBuilder.getLine('none'),
+        color: this.hairlineColor
       });
     }
   }
