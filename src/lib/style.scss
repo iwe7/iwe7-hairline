@@ -1,0 +1,22 @@
+.hairline {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    display: var(--display);
+    background-color: var(--color);
+    z-index: 1;
+    top: var(--top);
+    right: var(--right);
+    bottom: var(--bottom);
+    left: var(--left);
+    width: var(--width);
+    height: var(--height);
+    transform-origin: var(--originX) var(--originY);
+    transform: scale(var(--scaleX), var(--scaleY));
+    box-sizing: border-box;
+    pointer-events: none;
+    border: var(--border);
+    border-radius: var(--borderRadius);
+  }
+}
