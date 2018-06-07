@@ -1,4 +1,5 @@
-import { NgModule, Provider, HostBinding } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
+import { NgModule, Provider, HostBinding, Optional } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 import { ElementRef } from '@angular/core';
@@ -240,11 +241,28 @@ export class HairlineDirective extends BehaviorSubject<any> {
   }
   constructor(
     public icss: Iwe7IcssService,
+    @Optional()
     public ele: ElementRef,
+    @Optional()
+    public tpl: TemplateRef<any>,
+    @Optional()
+    public viewRef: ViewContainerRef,
     public hairlineBuilder: HairLineBuilder
   ) {
     super({});
-    this.icss.init(this, this.ele).subscribe(res => console.log(res));
+    if (this.tpl) {
+      console.info('ng-template 不支持添加样式, 已添加到上级');
+      const ele: HTMLElement = this.ele.nativeElement;
+      this.icss.init(this, { nativeElement: ele.parentElement }).subscribe(res => console.log(res));
+    } else {
+      if (this.ele.nativeElement.nodeType === 8) {
+        console.info('ng-container 不支持添加样式, 已添加到上级');
+        const ele: HTMLElement = this.ele.nativeElement;
+        this.icss.init(this, { nativeElement: ele.parentElement }).subscribe(res => console.log(res));
+      } else {
+        this.icss.init(this, this.ele).subscribe(res => console.log(res));
+      }
+    }
   }
 }
 
